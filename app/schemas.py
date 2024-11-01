@@ -9,7 +9,6 @@ class CreateUser(BaseModel):
     age: int
 
 class UpdateUser(BaseModel):
-    username: str
     firstname: str
     lastname: str
     age: int
