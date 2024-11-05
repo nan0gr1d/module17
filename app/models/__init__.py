@@ -5,5 +5,7 @@
 #  А это было рекомендовано в ДЗ.
 #  Работают импорты в самих фвйлах моделей.
 ######################################################################
-#  from app.backend.models.user import User
-#  from app.backend.models.task import Task
+#  from app.models.user import User
+#  from app.models.task import Task
+# from .user import User
+# from .task import Task

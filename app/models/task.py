@@ -1,9 +1,9 @@
 # task
 
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, Boolean, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from app.backend.db import Base
-from app.backend.models.user import User
+from app.models.user import User
 
 
 class Task(Base):

@@ -1,9 +1,9 @@
 # user
 
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, Boolean, Float, ForeignKey
+from sqlalchemy import Column, Integer, String
 from app.backend.db import Base
-from app.backend.models import *
+# from app.models.task import Task
 
 
 class User(Base):
