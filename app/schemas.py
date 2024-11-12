@@ -16,9 +16,11 @@ class UpdateUser(BaseModel):
 class CreateTask(BaseModel):
     title: str
     content: str
+    completed: bool
     priority: int
 
 class UpdateTask(BaseModel):
     title: str
     content: str
+    completed: bool
     priority: int

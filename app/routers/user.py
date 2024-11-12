@@ -39,6 +39,19 @@ async def user_by_id(db: Annotated[Session, Depends(get_db)], user_id: int):
     else:
         return user
 
+@router.get("/user_id/tasks")
+async def tasks_by_user_id(db: Annotated[Session, Depends(get_db)], user_id: int):
+    tasks = db.scalars(select(Task).where(Task.user_id == user_id)).all()
+    if tasks:
+        return tasks
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f'No tasks for user {user_id}'
+        )
+
+
+
 @router.post("/create")
 async def create_user(db: Annotated[Session, Depends(get_db)], create_user: CreateUser):
     db.execute(insert(User).values(username=create_user.username,
@@ -81,6 +94,10 @@ async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
             status_code=status.HTTP_404_NOT_FOUND,
             detail='User was not found'
         )
+    #, У нас связь таблиц по внешнему ключу (Foreign Key),
+    #  поэтому сначала удаляем данные из подчиненной таблицы.
+    #, В некоторых СУБД это реализуется т.н. каскадным удалением.
+    db.execute(delete(Task).where(Task.user_id == user_id))
     db.execute(delete(User).where(User.id == user_id))
     db.commit()
     return {
